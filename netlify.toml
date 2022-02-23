@@ -6,8 +6,9 @@
   package = "@netlify/plugin-nextjs"
 
 [[plugins]]
-  package = "/plugins/sentry-netlify-build-plugin"
+  package = "@sentry/netlify-build-plugin"
 
   [plugins.inputs]
     sentryOrg="leander-test"
     sentryProject="leander-test-next"
+    sentryRepository="my-custom-name"

@@ -9,6 +9,7 @@
   package = "/plugins/sentry-netlify-build-plugin"
 
   [plugins.inputs]
-    sentryOrg="leander-test"
-    sentryProject="leander-test-next"
-    sentryRepository="my-custom-name"
+    sentryOrg = "leander-test"
+    sentryProject = "leander-test-netlify"
+    sentryRepository = "my-custom-name"
+    deleteSourceMaps = true

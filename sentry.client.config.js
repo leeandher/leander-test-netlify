@@ -5,7 +5,7 @@ const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
 Sentry.init({
   dsn:
     SENTRY_DSN ||
-    "https://c55f1e9c0ca44eb5beffeb5ce41bb24e@leeandher.ngrok.io/8",
+    "https://cad0ca5cfd56429b9f71c5d5bb05cd7f@leeandher.ngrok.io/14",
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,

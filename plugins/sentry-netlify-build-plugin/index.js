@@ -10,6 +10,7 @@ const path = require("path");
 const SentryCli = require("@sentry/cli");
 const { promisify, inspect } = require("util");
 const { version } = require("./package.json");
+const glob = require("glob");
 
 const writeFile = promisify(fs.writeFile);
 const deleteFile = promisify(fs.unlink);
@@ -17,7 +18,6 @@ const deleteFile = promisify(fs.unlink);
 const CWD = path.resolve(process.cwd());
 const SENTRY_CONFIG_PATH = path.resolve(CWD, ".sentryclirc");
 const DEFAULT_SOURCE_MAP_URL_PREFIX = "~/";
-const DEFAULT_DELETE_SOURCE_MAPS = false;
 
 module.exports = {
   onPostBuild: async (pluginApi) => {
@@ -46,8 +46,6 @@ module.exports = {
     const sourceMapPath = inputs.sourceMapPath || PUBLISH_DIR;
     const sourceMapUrlPrefix =
       inputs.sourceMapUrlPrefix || DEFAULT_SOURCE_MAP_URL_PREFIX;
-    const shouldDeleteSourceMaps =
-      inputs.sentryDeleteSourceMaps || DEFAULT_DELETE_SOURCE_MAPS;
 
     if (RUNNING_IN_NETLIFY) {
       if (IS_PREVIEW && !inputs.deployPreviews) {
@@ -94,12 +92,9 @@ module.exports = {
       console.log();
 
       await deleteSentryConfig();
-
-      if (!shouldDeleteSourceMaps) {
-        console.log("Source map files retained.");
-      } else {
+      console.error("BOUTTA START UPLOADING SOURCE MAPS");
+      if (inputs.deleteSourceMaps) {
         console.log("Removing source map files.");
-        const glob = require("glob");
         const files = glob.sync(`${sourceMapPath}/**/*.map`);
         const deleteFileErrorHandler = (e) =>
           console.log("Error deleting source map file:", e);

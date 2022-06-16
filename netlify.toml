@@ -12,4 +12,4 @@
     sentryOrg = "leander-test"
     sentryProject = "leander-test-netlify"
     sentryRepository = "my-custom-name"
-    deleteSourceMaps = true
+    deleteSourceMaps = false
